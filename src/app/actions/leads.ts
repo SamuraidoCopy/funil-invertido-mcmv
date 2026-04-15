@@ -25,7 +25,7 @@ export async function createLeadAction(formData: {
           answers: formData.answers,
           profile: formData.profile || "mcmv_high_end_lead",
         },
-      ])
+      ] as any)
       .select()
       .single();
 
