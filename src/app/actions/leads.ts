@@ -74,8 +74,10 @@ export async function createLeadAction(formData: {
       
       // 4. Disparar Notificações via n8n (Webhook)
       const webhookUrl = process.env.N8N_WEBHOOK_URL;
+      console.log("DEBUG: Disparando webhook para:", webhookUrl);
+
       if (webhookUrl) {
-        fetch(webhookUrl, {
+        const response = await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -86,11 +88,15 @@ export async function createLeadAction(formData: {
             answers: formData.answers,
             timestamp: new Date().toISOString(),
           }),
-        }).catch(err => console.error("Webhook Error:", err));
+        });
+        
+        console.log("DEBUG: Resposta do Webhook Status:", response.status);
+      } else {
+        console.error("DEBUG: N8N_WEBHOOK_URL NÃO ENCONTRADA NAS VARIÁVEIS DE AMBIENTE!");
       }
 
     } catch (aiError) {
-      console.error("AI Analysis Error:", aiError);
+      console.error("DEBUG: Erro no fluxo de análise/webhook:", aiError);
       // Não trava o fluxo se a IA falhar
     }
 
