@@ -67,7 +67,7 @@ export async function createLeadAction(formData: {
             ...formData.answers, 
             ryan_analysis: analysisRaw 
           } 
-        })
+        } as any)
         .eq("id", leadData.id);
       
       // 4. Disparar Notificações via n8n (Webhook)
