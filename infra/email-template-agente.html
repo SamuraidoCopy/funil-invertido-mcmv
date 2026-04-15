@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <title>Novo Lead Qualificado: {{lead_nome}}</title>
+  <!--[if mso]>
+  <noscript>
+    <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; display: block; outline: none; }
+    
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f1f5f9;
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    }
+
+    .email-wrapper {
+      width: 100%;
+      background-color: #f1f5f9;
+      padding: 32px 16px;
+    }
+
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); /* Sombra levemente mais densa */
+    }
+
+    /* ─── HEADER (DARK MODE PARA O AGENTE) ──────────────── */
+    .header {
+      background: #0f172a; /* Slate 900 - Foco executivo */
+      padding: 40px 40px 32px;
+      text-align: left; /* Alinhamento à esquerda para leitura rápida */
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(234, 88, 12, 0.15); /* Orange translucido */
+      border: 1px solid rgba(234, 88, 12, 0.5);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fdba74; /* Orange claro */
+      margin-bottom: 20px;
+    }
+
+    .header-title {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+      margin: 0 0 8px 0;
+    }
+
+    .header-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: #94a3b8;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ─── STATUS BANNER (URGÊNCIA) ───────────────────────── */
+    .status-banner {
+      background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); /* Laranja quente */
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    /* ─── BODY ────────────────────────────────────────────── */
+    .body-content {
+      padding: 36px 40px;
+      background-color: #ffffff;
+    }
+
+    .lead-info-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .lead-info-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #64748b;
+      margin: 0 0 4px 0;
+    }
+
+    .lead-info-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .whatsapp-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #009933; /* Verde WhatsApp */
+      background: #dcfce7;
+      padding: 6px 12px;
+      border-radius: 8px;
+      display: inline-block;
+      margin: 0;
+    }
+
+    /* ─── ANÁLISE CARD (SISTEMA IA) ───────────────────────── */
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #475569;
+      margin: 0 0 16px 0;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 8px;
+    }
+
+    .analysis-card {
+      background: #fffbeb; /* Amarelo muito suave, como um marca texto leve */
+      border-left: 4px solid #f59e0b; /* Borda lateral amarela */
+      padding: 20px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 32px;
+    }
+
+    .analysis-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #92400e;
+      margin: 0 0 8px 0;
+    }
+
+    .analysis-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #78350f;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── DADOS RAW (RESPOSTAS) ───────────────────────────── */
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .data-item {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .data-question {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      margin: 0 0 4px 0;
+    }
+
+    .data-answer {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    /* ─── CTA BUTTON (WHATSAPP) ───────────────────────────── */
+    .cta-section {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: #25D366; /* Cor oficial do WhatsApp */
+      color: #ffffff !important;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .cta-subtext {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 12px 0 0 0;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      background: #f8fafc;
+      padding: 24px 40px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #64748b;
+      margin: 0 0 4px 0;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media only screen and (max-width: 620px) {
+      .email-container { border-radius: 16px !important; }
+      .header { padding: 28px 24px 24px !important; }
+      .header-title { font-size: 24px !important; }
+      .body-content { padding: 24px !important; }
+      .footer { padding: 24px !important; }
+      .lead-info-box { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .cta-button { width: 100% !important; padding: 16px 20px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="email-wrapper">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <div class="email-container">
+
+          <!-- HEADER -->
+          <div class="header">
+            <div class="header-badge" style="display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> 
+              Novo Prospecto
+            </div>
+            <h1 class="header-title">
+              Lead Aquecido<br/>MCMV 2026
+            </h1>
+            <p class="header-subtitle">
+              Sessão estratégica gerada via Funil Invertido.
+            </p>
+          </div>
+
+          <!-- STATUS BANNER (SLA) -->
+          <div class="status-banner">
+            <div style="width:24px;height:24px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <!-- clock icon -->
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2.5"/>
+                <path d="M12 6V12L16 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="status-text">
+              SLA de Contato: Inicie a conversa em até 4h.
+            </p>
+          </div>
+
+          <!-- BODY -->
+          <div class="body-content">
+
+            <!-- LEAD INFO DADOS MESTRES -->
+            <div class="lead-info-box">
+              <div>
+                <p class="lead-info-label">Nome do Cliente</p>
+                <p class="lead-info-value">{{lead_nome}}</p>
+              </div>
+              <div style="text-align: right;">
+                <p class="lead-info-label">Contato</p>
+                <p class="whatsapp-badge" style="display: inline-flex; align-items: center; gap: 6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                  {{lead_whatsapp}}
+                </p>
+              </div>
+            </div>
+
+            <!-- ANÁLISE SISTEMA IA -->
+            <div class="section-title" style="display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+              Laudo Analítico (Insight de Copy)
+            </div>
+            <div class="analysis-card">
+              <h3 class="analysis-title">{{analise_titulo}}</h3>
+              <p class="analysis-body">
+                {{analise_texto_ia}}
+              </p>
+            </div>
+
+            <!-- DADOS DO FORMULÁRIO -->
+            <div class="section-title" style="display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+              Dados Triados no Funil
+            </div>
+            <div class="data-grid">
+              
+              <!-- EXMPLO DE ITEM (Isso deve ser gerado pelo n8n via loop ou string HTML) -->
+              {{dados_perguntas_html}}
+              
+              <!-- O n8n vai substituir a tag acima por blocos como este abaixo:
+              <div class="data-item">
+                <p class="data-question">Qual a sua renda bruta?</p>
+                <p class="data-answer">Acima de R$ 4.400</p>
+              </div>
+              -->
+              
+            </div>
+
+            <!-- CTA WHATSAPP -->
+            <div class="cta-section">
+              <a href="https://wa.me/55{{lead_whatsapp_clean}}?text=Ol%C3%A1%20{{lead_nome_primeiro}}!%20Aqui%20%C3%A9%20o%20{{nome_agente}}%20da%20Caixa.%20Vi%20que%20voc%C3%AA%20foi%20pr%C3%A9-aprovado%20no%20nosso%20diagn%C3%B3stico.%20Vamos%20agendar%20sua%20sess%C3%A3o%3F" class="cta-button">
+                Iniciar Conversa no WhatsApp
+              </a>
+              <p class="cta-subtext">Click acima para abrir o Web WhatsApp já com a mensagem.</p>
+            </div>
+
+          </div>
+
+          <!-- FOOTER -->
+          <div class="footer">
+            <p class="footer-logo">AIOX Systems • Funil Invertido™</p>
+            <p style="font-family:'Inter', sans-serif; font-size:11px; color:#94a3b8; margin:0;">
+              Lead capturado em {{data_captura}}
+            </p>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

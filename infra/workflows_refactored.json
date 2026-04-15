@@ -1,0 +1,165 @@
+[
+  {
+    "updatedAt": "2026-04-14T15:35:50.672Z",
+    "createdAt": "2026-04-13T14:00:19.696Z",
+    "id": "1SUIWvJ41wG4sW8q",
+    "name": "Samurai-FI-MCMV",
+    "description": null,
+    "active": true,
+    "isArchived": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "mcmv-lead",
+          "options": {}
+        },
+        "id": "08ba7bb3-5ee3-4359-82e9-322211d8ec38",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -416,
+          496
+        ],
+        "webhookId": "19a2577d-caef-4466-8500-880f33091c55"
+      },
+      {
+        "parameters": {
+          "fromEmail": "samuraidocopy@gmail.com",
+          "toEmail": "samuraidocopy@gmail.com",
+          "subject": "={{ '🔥 NOVO LEAD: ' + $json.body.name }}",
+          "text": "={{ 'Nome: ' + $json.body.name + '\\nWhatsApp: ' + $json.body.whatsapp + '\\n\\n(Ative a visualização em HTML do seu provedor de email para ver o laudo completo do lead)' }}",
+          "options": {},
+          "emailFormat": "both",
+          "html": "={{ $json.html }}"
+        },
+        "id": "df8c4575-abf3-4fc4-b3e8-fb0643230120",
+        "name": "Email Alerta",
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2,
+        "position": [
+          0,
+          400
+        ],
+        "webhookId": "42cff0f6-720a-4be0-9f71-76acbb4475a1",
+        "credentials": {
+          "smtp": {
+            "id": "vtldeYEBdrXrDyi2",
+            "name": "SMTP account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://evolution-api:8080/message/sendText/samurai",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "mcmv_ryan_serhant_secret_777_!!"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"number\": \"5511983076914\",\n  \"text\": \"🚨 *NOVO LEAD QUALIFICADO*\\n\\n*Nome:* {{$json.body.name}}\\n*WhatsApp:* {{$json.body.whatsapp}}\\n\\n_Dê uma olhada no seu e-mail para ver a análise completa do Ryan Serhant!_\"\n}",
+          "options": {}
+        },
+        "id": "2d51d7aa-d030-475d-b041-d94a2beede9f",
+        "name": "Alerta WhatsApp",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          -176,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "\nconst template = \"<!DOCTYPE html>\\n<html lang=\\\"pt-BR\\\" xmlns:v=\\\"urn:schemas-microsoft-com:vml\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\" />\\n  <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\" />\\n  <meta http-equiv=\\\"X-UA-Compatible\\\" content=\\\"IE=edge\\\" />\\n  <meta name=\\\"x-apple-disable-message-reformatting\\\" />\\n  <title>Novo Lead Qualificado: {{lead_nome}}</title>\\n  <!--[if mso]>\\n  <noscript>\\n    <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>\\n  </noscript>\\n  <![endif]-->\\n  <style>\\n    /* Reset */\\n    *, *::before, *::after { box-sizing: border-box; }\\n    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }\\n    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }\\n    img { -ms-interpolation-mode: bicubic; border: 0; display: block; outline: none; }\\n    \\n    /* Google Fonts */\\n    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');\\n\\n    body {\\n      margin: 0;\\n      padding: 0;\\n      background-color: #f1f5f9;\\n      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;\\n    }\\n\\n    .email-wrapper {\\n      width: 100%;\\n      background-color: #f1f5f9;\\n      padding: 32px 16px;\\n    }\\n\\n    .email-container {\\n      max-width: 600px;\\n      margin: 0 auto;\\n      background-color: #ffffff;\\n      border-radius: 24px;\\n      overflow: hidden;\\n      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); /* Sombra levemente mais densa */\\n    }\\n\\n    /* ─── HEADER (DARK MODE PARA O AGENTE) ──────────────── */\\n    .header {\\n      background: #0f172a; /* Slate 900 - Foco executivo */\\n      padding: 40px 40px 32px;\\n      text-align: left; /* Alinhamento à esquerda para leitura rápida */\\n    }\\n\\n    .header-badge {\\n      display: inline-block;\\n      background: rgba(234, 88, 12, 0.15); /* Orange translucido */\\n      border: 1px solid rgba(234, 88, 12, 0.5);\\n      border-radius: 100px;\\n      padding: 6px 16px;\\n      font-family: 'Inter', sans-serif;\\n      font-size: 11px;\\n      font-weight: 700;\\n      letter-spacing: 0.08em;\\n      text-transform: uppercase;\\n      color: #fdba74; /* Orange claro */\\n      margin-bottom: 20px;\\n    }\\n\\n    .header-title {\\n      font-family: 'Outfit', 'Inter', sans-serif;\\n      font-size: 28px;\\n      font-weight: 800;\\n      color: #ffffff;\\n      line-height: 1.25;\\n      margin: 0 0 8px 0;\\n    }\\n\\n    .header-subtitle {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 15px;\\n      color: #94a3b8;\\n      margin: 0;\\n      line-height: 1.5;\\n    }\\n\\n    /* ─── STATUS BANNER (URGÊNCIA) ───────────────────────── */\\n    .status-banner {\\n      background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); /* Laranja quente */\\n      padding: 16px 40px;\\n      display: flex;\\n      align-items: center;\\n      gap: 12px;\\n    }\\n\\n    .status-text {\\n      font-family: 'Outfit', sans-serif;\\n      font-size: 16px;\\n      font-weight: 700;\\n      color: #ffffff;\\n      margin: 0;\\n    }\\n\\n    /* ─── BODY ────────────────────────────────────────────── */\\n    .body-content {\\n      padding: 36px 40px;\\n      background-color: #ffffff;\\n    }\\n\\n    .lead-info-box {\\n      background: #f8fafc;\\n      border: 1.5px solid #e2e8f0;\\n      border-radius: 16px;\\n      padding: 20px;\\n      margin-bottom: 28px;\\n      display: flex;\\n      align-items: center;\\n      justify-content: space-between;\\n    }\\n\\n    .lead-info-label {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 11px;\\n      font-weight: 600;\\n      text-transform: uppercase;\\n      color: #64748b;\\n      margin: 0 0 4px 0;\\n    }\\n\\n    .lead-info-value {\\n      font-family: 'Outfit', sans-serif;\\n      font-size: 18px;\\n      font-weight: 700;\\n      color: #0f172a;\\n      margin: 0;\\n    }\\n\\n    .whatsapp-badge {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 14px;\\n      font-weight: 600;\\n      color: #009933; /* Verde WhatsApp */\\n      background: #dcfce7;\\n      padding: 6px 12px;\\n      border-radius: 8px;\\n      display: inline-block;\\n      margin: 0;\\n    }\\n\\n    /* ─── ANÁLISE CARD (SISTEMA IA) ───────────────────────── */\\n    .section-title {\\n      font-family: 'Outfit', sans-serif;\\n      font-size: 14px;\\n      font-weight: 700;\\n      letter-spacing: 0.05em;\\n      text-transform: uppercase;\\n      color: #475569;\\n      margin: 0 0 16px 0;\\n      border-bottom: 2px solid #f1f5f9;\\n      padding-bottom: 8px;\\n    }\\n\\n    .analysis-card {\\n      background: #fffbeb; /* Amarelo muito suave, como um marca texto leve */\\n      border-left: 4px solid #f59e0b; /* Borda lateral amarela */\\n      padding: 20px;\\n      border-radius: 0 12px 12px 0;\\n      margin-bottom: 32px;\\n    }\\n\\n    .analysis-title {\\n      font-family: 'Outfit', sans-serif;\\n      font-size: 17px;\\n      font-weight: 700;\\n      color: #92400e;\\n      margin: 0 0 8px 0;\\n    }\\n\\n    .analysis-body {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 14px;\\n      color: #78350f;\\n      line-height: 1.6;\\n      margin: 0;\\n    }\\n\\n    /* ─── DADOS RAW (RESPOSTAS) ───────────────────────────── */\\n    .data-grid {\\n      display: grid;\\n      grid-template-columns: 1fr;\\n      gap: 12px;\\n      margin-bottom: 32px;\\n    }\\n\\n    .data-item {\\n      background: #f8fafc;\\n      padding: 16px;\\n      border-radius: 12px;\\n      border: 1px solid #f1f5f9;\\n    }\\n\\n    .data-question {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 12px;\\n      font-weight: 600;\\n      color: #64748b;\\n      margin: 0 0 4px 0;\\n    }\\n\\n    .data-answer {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 14px;\\n      font-weight: 500;\\n      color: #0f172a;\\n      margin: 0;\\n    }\\n\\n    /* ─── CTA BUTTON (WHATSAPP) ───────────────────────────── */\\n    .cta-section {\\n      text-align: center;\\n      margin-top: 10px;\\n    }\\n\\n    .cta-button {\\n      display: inline-block;\\n      background: #25D366; /* Cor oficial do WhatsApp */\\n      color: #ffffff !important;\\n      text-decoration: none;\\n      font-family: 'Outfit', sans-serif;\\n      font-size: 16px;\\n      font-weight: 700;\\n      padding: 18px 40px;\\n      border-radius: 100px;\\n      letter-spacing: 0.02em;\\n      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);\\n      width: 100%;\\n      max-width: 320px;\\n    }\\n\\n    .cta-subtext {\\n      font-family: 'Inter', sans-serif;\\n      font-size: 12px;\\n      color: #94a3b8;\\n      margin: 12px 0 0 0;\\n    }\\n\\n    /* ─── FOOTER ──────────────────────────────────────────── */\\n    .footer {\\n      background: #f8fafc;\\n      padding: 24px 40px;\\n      text-align: center;\\n      border-top: 1px solid #e2e8f0;\\n      border-radius: 0 0 24px 24px;\\n    }\\n\\n    .footer-logo {\\n      font-family: 'Outfit', sans-serif;\\n      font-size: 14px;\\n      font-weight: 700;\\n      color: #64748b;\\n      margin: 0 0 4px 0;\\n    }\\n\\n    /* ─── RESPONSIVE ──────────────────────────────────────── */\\n    @media only screen and (max-width: 620px) {\\n      .email-container { border-radius: 16px !important; }\\n      .header { padding: 28px 24px 24px !important; }\\n      .header-title { font-size: 24px !important; }\\n      .body-content { padding: 24px !important; }\\n      .footer { padding: 24px !important; }\\n      .lead-info-box { flex-direction: column; align-items: flex-start; gap: 12px; }\\n      .cta-button { width: 100% !important; padding: 16px 20px !important; }\\n    }\\n  </style>\\n</head>\\n<body>\\n\\n<div class=\\\"email-wrapper\\\">\\n  <table role=\\\"presentation\\\" width=\\\"100%\\\" cellspacing=\\\"0\\\" cellpadding=\\\"0\\\">\\n    <tr>\\n      <td>\\n        <div class=\\\"email-container\\\">\\n\\n          <!-- HEADER -->\\n          <div class=\\\"header\\\">\\n            <div class=\\\"header-badge\\\" style=\\\"display: inline-flex; align-items: center; gap: 6px;\\\">\\n              <svg width=\\\"12\\\" height=\\\"12\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2.5\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"><path d=\\\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\\\"/></svg> \\n              Novo Prospecto\\n            </div>\\n            <h1 class=\\\"header-title\\\">\\n              Lead Aquecido<br/>MCMV 2026\\n            </h1>\\n            <p class=\\\"header-subtitle\\\">\\n              Sessão estratégica gerada via Funil Invertido.\\n            </p>\\n          </div>\\n\\n          <!-- STATUS BANNER (SLA) -->\\n          <div class=\\\"status-banner\\\">\\n            <div style=\\\"width:24px;height:24px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;\\\">\\n              <!-- clock icon -->\\n              <svg width=\\\"14\\\" height=\\\"14\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">\\n                <circle cx=\\\"12\\\" cy=\\\"12\\\" r=\\\"10\\\" stroke=\\\"white\\\" stroke-width=\\\"2.5\\\"/>\\n                <path d=\\\"M12 6V12L16 14\\\" stroke=\\\"white\\\" stroke-width=\\\"2.5\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\n              </svg>\\n            </div>\\n            <p class=\\\"status-text\\\">\\n              SLA de Contato: Inicie a conversa em até 4h.\\n            </p>\\n          </div>\\n\\n          <!-- BODY -->\\n          <div class=\\\"body-content\\\">\\n\\n            <!-- LEAD INFO DADOS MESTRES -->\\n            <div class=\\\"lead-info-box\\\">\\n              <div>\\n                <p class=\\\"lead-info-label\\\">Nome do Cliente</p>\\n                <p class=\\\"lead-info-value\\\">{{lead_nome}}</p>\\n              </div>\\n              <div style=\\\"text-align: right;\\\">\\n                <p class=\\\"lead-info-label\\\">Contato</p>\\n                <p class=\\\"whatsapp-badge\\\" style=\\\"display: inline-flex; align-items: center; gap: 6px;\\\">\\n                  <svg width=\\\"14\\\" height=\\\"14\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2.5\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"><rect width=\\\"14\\\" height=\\\"20\\\" x=\\\"5\\\" y=\\\"2\\\" rx=\\\"2\\\" ry=\\\"2\\\"/><path d=\\\"M12 18h.01\\\"/></svg>\\n                  {{lead_whatsapp}}\\n                </p>\\n              </div>\\n            </div>\\n\\n            <!-- ANÁLISE SISTEMA IA -->\\n            <div class=\\\"section-title\\\" style=\\\"display: flex; align-items: center; gap: 8px;\\\">\\n              <svg width=\\\"18\\\" height=\\\"18\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"><path d=\\\"M12 8V4H8\\\"/><rect width=\\\"16\\\" height=\\\"12\\\" x=\\\"4\\\" y=\\\"8\\\" rx=\\\"2\\\"/><path d=\\\"M2 14h2\\\"/><path d=\\\"M20 14h2\\\"/><path d=\\\"M15 13v2\\\"/><path d=\\\"M9 13v2\\\"/></svg>\\n              Laudo Analítico (Insight de Copy)\\n            </div>\\n            <div class=\\\"analysis-card\\\">\\n              <h3 class=\\\"analysis-title\\\">{{analise_titulo}}</h3>\\n              <p class=\\\"analysis-body\\\">\\n                {{analise_texto_ia}}\\n              </p>\\n            </div>\\n\\n            <!-- DADOS DO FORMULÁRIO -->\\n            <div class=\\\"section-title\\\" style=\\\"display: flex; align-items: center; gap: 8px;\\\">\\n              <svg width=\\\"18\\\" height=\\\"18\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"><rect width=\\\"8\\\" height=\\\"4\\\" x=\\\"8\\\" y=\\\"2\\\" rx=\\\"1\\\" ry=\\\"1\\\"/><path d=\\\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\\\"/><path d=\\\"M12 11h4\\\"/><path d=\\\"M12 16h4\\\"/><path d=\\\"M8 11h.01\\\"/><path d=\\\"M8 16h.01\\\"/></svg>\\n              Dados Triados no Funil\\n            </div>\\n            <div class=\\\"data-grid\\\">\\n              \\n              <!-- EXMPLO DE ITEM (Isso deve ser gerado pelo n8n via loop ou string HTML) -->\\n              {{dados_perguntas_html}}\\n              \\n              <!-- O n8n vai substituir a tag acima por blocos como este abaixo:\\n              <div class=\\\"data-item\\\">\\n                <p class=\\\"data-question\\\">Qual a sua renda bruta?</p>\\n                <p class=\\\"data-answer\\\">Acima de R$ 4.400</p>\\n              </div>\\n              -->\\n              \\n            </div>\\n\\n            <!-- CTA WHATSAPP -->\\n            <div class=\\\"cta-section\\\">\\n              <a href=\\\"https://wa.me/55{{lead_whatsapp_clean}}?text=Ol%C3%A1%20{{lead_nome_primeiro}}!%20Aqui%20%C3%A9%20o%20{{nome_agente}}%20da%20Caixa.%20Vi%20que%20voc%C3%AA%20foi%20pr%C3%A9-aprovado%20no%20nosso%20diagn%C3%B3stico.%20Vamos%20agendar%20sua%20sess%C3%A3o%3F\\\" class=\\\"cta-button\\\">\\n                Iniciar Conversa no WhatsApp\\n              </a>\\n              <p class=\\\"cta-subtext\\\">Click acima para abrir o Web WhatsApp já com a mensagem.</p>\\n            </div>\\n\\n          </div>\\n\\n          <!-- FOOTER -->\\n          <div class=\\\"footer\\\">\\n            <p class=\\\"footer-logo\\\">AIOX Systems • Funil Invertido™</p>\\n            <p style=\\\"font-family:'Inter', sans-serif; font-size:11px; color:#94a3b8; margin:0;\\\">\\n              Lead capturado em {{data_captura}}\\n            </p>\\n          </div>\\n\\n        </div>\\n      </td>\\n    </tr>\\n  </table>\\n</div>\\n\\n</body>\\n</html>\\n\";\nconst body = $node[\"Webhook\"].json.body;\nconst answers = body.answers || {};\n\nconst questionMap = {\n  \"step_1\": \"Qual é o seu MAIOR motivo para querer sair da sua casa atual?\",\n  \"step_2\": \"Você já tem algum valor guardado para documentação ou entrada?\",\n  \"step_3\": \"Possui pendências registradas no seu CPF ou do seu cônjuge?\",\n  \"step_4\": \"Qual o valor da sua Renda Bruta Familiar Comprovada?\",\n  \"motivation\": \"Maior motivação para sair de onde mora hoje\",\n  \"feelings\": \"Sentimento de saber que pode parar de pagar aluguel\",\n  \"submit_at\": \"Data de submissão\"\n};\n\nconst answerMap = {\n  \"aluguel\": \"O aluguel está me sufocando todo mês.\",\n  \"favor\": \"Moro de favor e quero a minha independência.\",\n  \"espaco\": \"A casa está pequena para a minha família.\",\n  \"poupanca\": \"Tenho de R$ 5.000 a R$ 10.000 guardados.\",\n  \"fgts\": \"Tenho saldo no meu FGTS (carteira assinada).\",\n  \"subsidio\": \"Não tenho nada guardado, dependo do subsídio.\",\n  \"restricao_sim\": \"Sim, possuo restrição.\",\n  \"restricao_nao\": \"Não, meu CPF está totalmente limpo.\",\n  \"faixa_1\": \"Abaixo de R$ 2.640\",\n  \"faixa_2\": \"Entre R$ 2.641 e R$ 4.400\",\n  \"faixa_3\": \"Acima de R$ 4.400\"\n};\n\nlet answersHtml = Object.entries(answers).map(([k,v]) => {\n  if (k === 'submit_at') return '';\n  let question = questionMap[k] || k;\n  let answer = answerMap[v] || v;\n  return `<div style=\"background:#f8fafc;padding:16px;border-radius:12px;border:1px solid #f1f5f9;margin-bottom:12px;\">    <p style=\"font-family:Inter,sans-serif;font-size:12px;font-weight:600;color:#64748b;margin:0 0 4px 0;\">${question}</p>    <p style=\"font-family:Inter,sans-serif;font-size:14px;font-weight:500;color:#0f172a;margin:0;\">${answer}</p>  </div>`;\n}).join('');\n\nlet html = template\n  .replace(/{{lead_nome}}/g, body.name || '')\n  .replace(/{{lead_whatsapp}}/g, body.whatsapp || '')\n  .replace(/{{lead_whatsapp_clean}}/g, (body.whatsapp || '').replace(/\\D/g, ''))\n  .replace(/{{lead_nome_primeiro}}/g, (body.name || '').split(' ')[0])\n  .replace(/{{nome_agente}}/g, 'Consultor Caixa')\n  .replace(/{{analise_titulo}}/g, 'Alerta do Sistema')\n  .replace(/{{analise_texto_ia}}/g, (body.analysis || '')\n      .replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>')\n      .replace(/\\n/g, '<br>'))\n  .replace(/{{data_captura}}/g, body.timestamp || '')\n  .replace(/{{dados_perguntas_html}}/g, answersHtml);\n\nreturn [{\n  json: {\n    html: html,\n    body: body\n  }\n}];\n"
+        },
+        "id": "code-html-gen-001",
+        "name": "Gerador de Email",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -300,
+          400
+        ]
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Gerador de Email",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Alerta WhatsApp",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Gerador de Email": {
+        "main": [
+          [
+            {
+              "node": "Email Alerta",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "binaryMode": "separate"
+    },
+    "staticData": null,
+    "meta": {
+      "templateCredsSetupCompleted": true
+    },
+    "pinData": {},
+    "versionId": "03fbbf28-bf67-4571-9252-65c70736b897",
+    "activeVersionId": "03fbbf28-bf67-4571-9252-65c70736b897",
+    "versionCounter": 52,
+    "triggerCount": 1,
+    "tags": [],
+    "shared": [
+      {
+        "updatedAt": "2026-04-13T14:00:19.708Z",
+        "createdAt": "2026-04-13T14:00:19.708Z",
+        "role": "workflow:owner",
+        "workflowId": "1SUIWvJ41wG4sW8q",
+        "projectId": "5dylNQcNiMepuBdy",
+        "project": {
+          "updatedAt": "2026-04-13T13:57:41.194Z",
+          "createdAt": "2026-04-13T13:34:07.436Z",
+          "id": "5dylNQcNiMepuBdy",
+          "name": "Vitor Uehara <samuraidocopy@gmail.com>",
+          "type": "personal",
+          "icon": null,
+          "description": null,
+          "creatorId": "0ea92540-edd6-4ca2-a664-fe5a22ec8013"
+        }
+      }
+    ],
+    "versionMetadata": {
+      "name": "Version 03fbbf28",
+      "description": ""
+    }
+  }
+]
